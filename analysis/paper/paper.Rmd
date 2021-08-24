@@ -1,0 +1,124 @@
+---
+title: "Title Goes Here"
+author:
+  - Joe DeCesaro:
+      email: jdecesaro@bren.ucsb.edu
+      institute: UCSB
+      correspondence: true
+institute:
+  - UofO: University of California Santa Barbara
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: 
+    bookdown::word_document2:
+      fig_caption: yes
+      reference_docx: "../templates/template.docx" # Insert path for the DOCX file
+      pandoc_args:
+      - --lua-filter=../templates/scholarly-metadata.lua
+      - --lua-filter=../templates/author-info-blocks.lua
+      - --lua-filter=../templates/pagebreak.lua
+bibliography: references.bib
+csl: "../templates/journal-of-archaeological-science.csl" # Insert path for the bib-style
+abstract: |
+  Text of abstract
+keywords: |
+  keyword 1; keyword 2; keyword 3
+highlights: |
+  These are the highlights. 
+---
+
+<!-- This is the format for text comments that will be ignored during renderings. Do not put R code in these comments because it will not be ignored. -->
+
+<!-- With the following code you can access and display values from the yml header above. -->
+
+Keywords: `r rmarkdown::metadata$keywords`
+
+Highlights: `r rmarkdown::metadata$highlights`
+
+<!-- The following code chunk defines some general settings how code chunks should behave. -->
+
+```{r setup, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  warning = FALSE,
+  message = FALSE,
+  echo = FALSE,
+  comment = "#>",
+  fig.path = "../figures/",
+  dpi = 300
+)
+```
+
+<!-- The actual document text starts here: -->
+
+# Introduction
+
+Wow this is so amazing. Below is a Lorem Ipsum to fill the space of a document.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Hendrerit gravida rutrum quisque non tellus. Pellentesque dignissim enim sit amet venenatis urna cursus. Mi bibendum neque egestas congue quisque egestas diam in. Odio euismod lacinia at quis risus sed. Tempus urna et pharetra pharetra massa massa ultricies. Aliquam vestibulum morbi blandit cursus risus. Nulla malesuada pellentesque elit eget gravida cum. Quis viverra nibh cras pulvinar mattis nunc sed blandit. Aliquam eleifend mi in nulla. Mauris vitae ultricies leo integer malesuada nunc vel.
+
+Here is a citation [@Marwick2017]
+
+# Background
+
+Et tortor at risus viverra. Nulla facilisi cras fermentum odio eu. Massa sed elementum tempus egestas sed. Odio facilisis mauris sit amet massa vitae. Accumsan in nisl nisi scelerisque eu. Risus in hendrerit gravida rutrum. Vel eros donec ac odio tempor orci dapibus ultrices. Felis donec et odio pellentesque. Purus semper eget duis at tellus at urna. At lectus urna duis convallis convallis tellus id interdum. Tellus id interdum velit laoreet id donec ultrices tincidunt arcu. Sed adipiscing diam donec adipiscing tristique. Lorem ipsum dolor sit amet consectetur adipiscing.
+
+# Methods
+
+Tristique magna sit amet purus gravida quis blandit turpis. Vitae proin sagittis nisl rhoncus mattis. Semper viverra nam libero justo laoreet sit. Enim nec dui nunc mattis enim. Diam donec adipiscing tristique risus nec feugiat in fermentum. Mattis ullamcorper velit sed ullamcorper morbi. Quis risus sed vulputate odio ut enim blandit volutpat maecenas. Lobortis feugiat vivamus at augue eget arcu dictum. Orci phasellus egestas tellus rutrum tellus pellentesque eu tincidunt tortor. Orci nulla pellentesque dignissim enim sit. Id consectetur purus ut faucibus pulvinar elementum. Amet nisl purus in mollis nunc sed id. Lobortis mattis aliquam faucibus purus in massa tempor nec feugiat. Etiam non quam lacus suspendisse faucibus. Egestas integer eget aliquet nibh praesent tristique. Malesuada bibendum arcu vitae elementum.
+
+Sit amet nisl purus in mollis nunc sed id. Sed viverra ipsum nunc aliquet bibendum enim facilisis gravida neque. Tincidunt ornare massa eget egestas purus viverra. Velit dignissim sodales ut eu sem integer vitae justo. Euismod in pellentesque massa placerat. Arcu risus quis varius quam. Sit amet nisl purus in mollis. Sed odio morbi quis commodo. Diam quis enim lobortis scelerisque fermentum dui faucibus in ornare. Integer enim neque volutpat ac tincidunt vitae. Aliquam eleifend mi in nulla posuere sollicitudin aliquam ultrices. Pulvinar mattis nunc sed blandit libero volutpat.
+
+# Results
+
+Et tortor at risus viverra adipiscing at. Purus non enim praesent elementum facilisis leo vel fringilla. Id porta nibh venenatis cras sed felis. Adipiscing tristique risus nec feugiat in. Massa tempor nec feugiat nisl pretium fusce. Sit amet aliquam id diam. Quisque non tellus orci ac auctor augue mauris augue neque. Urna nec tincidunt praesent semper feugiat nibh sed. In nulla posuere sollicitudin aliquam. Risus at ultrices mi tempus imperdiet nulla malesuada. Consequat ac felis donec et odio. Consectetur adipiscing elit duis tristique sollicitudin nibh.
+
+```{r get-data, eval = FALSE}
+# Note the path that we need to use to access our data files when rendering this document
+my_data <- read.csv(here::here('analysis/data/raw_data/my_csv_file.csv'))
+```
+
+```{r demo-plot, fig.cap="A plot of random numbers"}
+plot(rnorm(10))
+```
+
+Figure \@ref(fig:demo-plot) shows how we can have a caption and cross-reference for a plot
+
+```{r demo-inline-code}
+x <- round(pi, 2)
+```
+
+Here is an example of inline code `r x` in the middle of a sentence. 
+
+# Discussion
+
+# Conclusion
+
+# Acknowledgements
+
+<!-- The following line inserts a page break  -->
+
+\newpage
+
+# References 
+
+<!-- The following line ensures the references appear here for the MS Word or HTML output files, rather than right at the end of the document (this will not work for PDF files):  -->
+
+<div id="refs"></div>
+
+\newpage
+
+### Colophon
+
+This report was generated on `r Sys.time()` using the following computational environment and dependencies: 
+
+```{r colophon, cache = FALSE}
+# which R packages and versions?
+if ("devtools" %in% installed.packages()) devtools::session_info()
+```
+
+The current Git commit details are:
+
+```{r}
+# what commit is this file at? 
+if ("git2r" %in% installed.packages() & git2r::in_repository(path = ".")) git2r::repository(here::here())  
+```
